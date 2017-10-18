@@ -27,7 +27,7 @@ public class JVector {
 	}
 
 	public double getMagnitude() {
-		return magnitude;
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 
 	public void multiply(double scalar) {
@@ -59,15 +59,27 @@ public class JVector {
 		return new JVector(invX, invY);
 	}
 
-	public static JVector add(JVector vector1, JVector vector2) {
-		double sumX = vector1.x + vector2.x;
-		double sumY = vector1.y + vector2.y;
+	public void add(JVector vector) {
+		x += vector.x;
+		y += vector.y;
+		magnitude = getMagnitude();
+	}
+
+	public void sub(JVector vector) {
+		x -= vector.x;
+		y -= vector.y;
+		magnitude = getMagnitude();
+	}
+
+	public static JVector add2Vecs(JVector vector1, JVector vector2) {
+		double sumX = vector1.getX() + vector2.getX();
+		double sumY = vector1.getY() + vector2.getY();
 		return new JVector(sumX, sumY);
 	}
 
-	public static JVector sub(JVector vector1, JVector vector2) {
-		double subX = vector1.x - vector2.x;
-		double subY = vector1.y - vector2.y;
+	public static JVector sub2Vecs(JVector vector1, JVector vector2) {
+		double subX = vector1.getX() - vector2.getX();
+		double subY = vector1.getY() - vector2.getY();
 		return new JVector(subX, subY);
 	}
 }
