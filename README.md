@@ -17,7 +17,8 @@ Status of the project:
 18-10-2017: creating the window, the canvas, and the framerate.
 18-10-2017: creating the agents, the food, and the poison
 18-10-2017: creating the steering forces and evolving stuff
-18-10-2017 (CURRENT STATUS): Adding a perception radius to the agents
+18-10-2017: adding a perception radius to the agents
+19-10-2017 (CURRENT STATUS): adding the evolution and mutation to the agents
 
 Craig Reynold's paper: https://www.red3d.com/cwr/steer/
 Dan Shiffman in YouTube: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
