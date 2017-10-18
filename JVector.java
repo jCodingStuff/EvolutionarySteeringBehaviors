@@ -1,8 +1,8 @@
 public class JVector {
 
-	private double x;
-	private double y;
-	private double magnitude;
+	double x;
+	double y;
+	double magnitude;
 
 	public JVector(double x, double y) {
 		this.x = x;
