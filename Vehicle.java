@@ -26,7 +26,7 @@ public class Vehicle {
 		velocity = new JVector(0, -2);
 		acceleration = new JVector(0, 0);
 
-		maxVelocity = 3;
+		maxVelocity = 3.5;
 		maxForce = 0.5;
 
 		health = 1;
@@ -49,7 +49,7 @@ public class Vehicle {
 		health -= 0.005;
 
 		velocity.add(acceleration);
-		double speed = velocity.getMagnitude();
+		double speed = velocity.getMagnitude(); //Limit the speed
 		double max = maxData(speed, maxVelocity);
 		velocity.setMagnitude(max);
 		position.add(velocity);

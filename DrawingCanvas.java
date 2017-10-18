@@ -26,7 +26,7 @@ public class DrawingCanvas extends Canvas {
 
 		//FOOD
 		food = new ArrayList<JVector>();
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 40; i++) {
 			int x = (int) (Math.random()*canvasSize().getX());
 			int y = (int) (Math.random()*canvasSize().getY());
 			food.add(new JVector(x, y));
@@ -34,7 +34,7 @@ public class DrawingCanvas extends Canvas {
 
 		//POISON
 		poison = new ArrayList<JVector>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			int x = (int) (Math.random()*canvasSize().getX());
 			int y = (int) (Math.random()*canvasSize().getY());
 			poison.add(new JVector(x, y));
@@ -55,12 +55,20 @@ public class DrawingCanvas extends Canvas {
 			g.setColor(new Color(24, 23, 69));
 			g.fillRect(0, 0, canvasSize().intX(), canvasSize().intY());
 
-			//Add food once in a while, use a timer
+			//Add food once in a while
 			if (Math.random()*100 < 5) {
 				int x = (int) (Math.random()*canvasSize().getX());
 				int y = (int) (Math.random()*canvasSize().getY());
 				food.add(new JVector(x, y));
 			}
+
+			//Add poison once in a while
+			if (Math.random()*100 < 2) {
+				int x = (int) (Math.random()*canvasSize().getX());
+				int y = (int) (Math.random()*canvasSize().getY());
+				poison.add(new JVector(x, y));
+			}
+
 			//Draw Food
 			g.setColor(new Color(0, 255, 0));
 			for (int i = 0; i < food.size(); i++) {
