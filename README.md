@@ -13,7 +13,8 @@ Finally, I will set general rules: agents are not able to go off the field, food
 The objective of this project is to simulate a society and see what is the OPTIMAL AGENT.
 
 16-10-2017: creating a custom vector class to work with the physics of the world (steering forces).
-18-10-2017 (CURRENT STATUS): creating the window, the canvas, and the framerate.
+18-10-2017: creating the window, the canvas, and the framerate.
+18-10-2017 (CURRENT STATUS): creating the agents, the food, and the poison
 
 Craig Reynold's paper: https://www.red3d.com/cwr/steer/
 Dan Shiffman in YouTube: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
