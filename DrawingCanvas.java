@@ -75,6 +75,7 @@ public class DrawingCanvas extends Canvas {
 
 			//Draw agents
 			for (int i = agents.size() - 1; i >= 0; i--) { //Loop backwards to check everything
+				agents.get(i).boundaries(); //Repel the walls
 				agents.get(i).applyBehaviours(food, poison);
 				agents.get(i).update();
 				agents.get(i).draw(g);

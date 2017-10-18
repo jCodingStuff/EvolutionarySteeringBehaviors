@@ -12,6 +12,7 @@ public class Vehicle {
 	double maxVelocity;
 	double maxForce;
 	double health;
+	int borders;
 
 	JVector position;
 	JVector velocity;
@@ -29,10 +30,11 @@ public class Vehicle {
 		maxForce = 0.5;
 
 		health = 1;
+		borders = 20; //Appy a steering behaviour when going outside the screen
 
 		dna = new double[2];
-		dna[0] = (Math.random()*10) - 5;
-		dna[1] = (Math.random()*10) - 5;
+		dna[0] = (Math.random()*4) - 2;
+		dna[1] = (Math.random()*4) - 2;
 	}
 
 	public void update() {
@@ -52,8 +54,8 @@ public class Vehicle {
 	}
 	
 	public void applyBehaviours(ArrayList<JVector> good, ArrayList<JVector> bad) {
-		JVector steerG = this.eat(good, 0.1); //Eat food, gain health
-		JVector steerB = this.eat(bad, -0.25); //Eat poison, get sick :(
+		JVector steerG = this.eat(good, 0.2); //Eat food, gain health
+		JVector steerB = this.eat(bad, -0.5); //Eat poison, get sick :(
 
 		steerG.multiply(this.dna[0]);
 		steerB.multiply(this.dna[1]);
@@ -77,22 +79,33 @@ public class Vehicle {
 		g.fillRect(position.intX(), position.intY(), AGENT_WIDTH, AGENT_WIDTH);
 	}
 
-	/*
-	public void borders() {
-		if (position.intX() > canvas.getWidth()) {
-			position.x = 0;
+	public void boundaries() { //When it gets closer to a wall, make a force to get it away
+		JVector desired = null;
+
+		if (this.position.intX() < borders) {
+			desired = new JVector(this.maxVelocity, this.velocity.getY());
 		}
-		else if (position.intX() < 0) {
-			position.x = canvas.getWidth();
+		else if (this.position.intX() > canvas.getWidth() - borders) {
+			desired = new JVector(-this.maxVelocity, this.velocity.getY());
 		}
-		else if (position.intY() > canvas.getHeight()) {
-			position.y = 0;
+
+		if (this.position.intY() < borders) {
+			desired = new JVector(this.velocity.getX(), this.maxVelocity);
 		}
-		else if (position.intY() < 0) {
-			position.y = canvas.getHeight();
+		else if (this.position.intY() > canvas.getHeight() - borders) {
+			desired = new JVector(this.velocity.getX(), -this.maxVelocity);
+		}
+
+		if (desired != null) {
+			desired.normalize();
+			desired.multiply(this.maxVelocity);
+			JVector steer = JVector.sub2Vecs(desired, this.velocity);
+			double mag = steer.getMagnitude();
+			double maxF = maxData(mag, this.maxForce);
+			steer.setMagnitude(maxF);
+			this.applyForce(steer);
 		}
 	}
-	*/
 
 	public JVector eat(ArrayList<JVector> list, double nutrition) {
 		double record = Double.MAX_VALUE;
