@@ -32,9 +32,16 @@ public class Vehicle {
 		health = 1;
 		borders = 20; //Appy a steering behaviour when going outside the screen
 
-		dna = new double[2];
+		dna = new double[4];
+
+		// Attraction to food
 		dna[0] = (Math.random()*4) - 2;
+		// Attraction to poison
 		dna[1] = (Math.random()*4) - 2;
+		// Food perception
+		dna[2] = (int)(Math.random()*91) + 10; //Between 10 and 100
+		// Poison perception
+		dna[3] = (int)(Math.random()*91) + 10;
 	}
 
 	public void update() {
@@ -54,8 +61,8 @@ public class Vehicle {
 	}
 	
 	public void applyBehaviours(ArrayList<JVector> good, ArrayList<JVector> bad) {
-		JVector steerG = this.eat(good, 0.2); //Eat food, gain health
-		JVector steerB = this.eat(bad, -0.5); //Eat poison, get sick :(
+		JVector steerG = this.eat(good, 0.2, this.dna[2]); //Eat food, gain health
+		JVector steerB = this.eat(bad, -0.5, this.dna[3]); //Eat poison, get sick :(
 
 		steerG.multiply(this.dna[0]);
 		steerB.multiply(this.dna[1]);
@@ -77,6 +84,10 @@ public class Vehicle {
 			g.setColor(new Color(0, 255, 0));
 		}
 		g.fillRect(position.intX(), position.intY(), AGENT_WIDTH, AGENT_WIDTH);
+		g.setColor(new Color(0, 255, 0)); //Food perception
+		g.drawOval(position.intX() - (int)this.dna[2], position.intY() - (int)this.dna[2], (int)(this.dna[2]*2), (int)(this.dna[2]*2)); //Put the centre of the circle in the centre
+		g.setColor(new Color(255, 0, 0)); //Poison perception
+		g.drawOval(position.intX() - (int)this.dna[3], position.intY() - (int)this.dna[3], (int)(this.dna[3]*2), (int)(this.dna[3]*2));
 	}
 
 	public void boundaries() { //When it gets closer to a wall, make a force to get it away
@@ -107,13 +118,13 @@ public class Vehicle {
 		}
 	}
 
-	public JVector eat(ArrayList<JVector> list, double nutrition) {
+	public JVector eat(ArrayList<JVector> list, double nutrition, double perception) {
 		double record = Double.MAX_VALUE;
 		int closestIndex = -1;
 		for (int i = 0; i < list.size(); i++) {
 			JVector dist = JVector.sub2Vecs(this.position, list.get(i));
 			double mag = dist.getMagnitude();
-			if (mag < record) {
+			if (mag < record && mag < perception) {
 				record = mag;
 				closestIndex = i;
 			}
