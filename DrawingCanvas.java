@@ -21,10 +21,19 @@ public class DrawingCanvas extends Canvas {
 
 		//AGENTS
 		agents = new ArrayList<Vehicle>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			int x = (int) (Math.random()*canvasSize().getX());
 			int y = (int) (Math.random()*canvasSize().getY());
-			agents.add(new Vehicle(x, y, this));
+			double[] dna = new double[4];
+			// Attraction to food
+			dna[0] = (Math.random()*4) - 2;
+			// Attraction to poison
+			dna[1] = (Math.random()*4) - 2;
+			// Food perception
+			dna[2] = (int)(Math.random()*101);
+			// Poison perception
+			dna[3] = (int)(Math.random()*101);
+			agents.add(new Vehicle(x, y, dna, this));
 		}
 
 		//FOOD
@@ -59,7 +68,7 @@ public class DrawingCanvas extends Canvas {
 			g.fillRect(0, 0, canvasSize().intX(), canvasSize().intY());
 
 			//Add food once in a while
-			if (Math.random()*100 < 4) {
+			if (Math.random()*100 < 5) {
 				int x = (int) (Math.random()*canvasSize().getX());
 				int y = (int) (Math.random()*canvasSize().getY());
 				food.add(new JVector(x, y));
@@ -91,7 +100,15 @@ public class DrawingCanvas extends Canvas {
 				agents.get(i).update();
 				agents.get(i).draw(g);
 
+				Vehicle newAgent = agents.get(i).cloneMe();
+				if (newAgent != null) {
+					agents.add(newAgent); //As looping the array backwards, I add thing to the end and I can get to the beginning
+				}
+
 				if (agents.get(i).dead()) {
+					int x = agents.get(i).position.intX();
+					int y = agents.get(i).position.intY();
+					food.add(new JVector(x, y));
 					agents.remove(i);
 				}
 			}

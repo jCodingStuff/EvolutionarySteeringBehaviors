@@ -6,8 +6,9 @@ public class Vehicle {
 
 	DrawingCanvas canvas;
 
-	final int AGENT_WIDTH = 15;
-	final int AGENT_HEIGHT = 15;
+	final int AGENT_WIDTH = 10;
+	final int AGENT_HEIGHT = 10;
+	final int mr = 1; //Mutation probability, by 100
 
 	double maxVelocity;
 	double maxForce;
@@ -20,7 +21,7 @@ public class Vehicle {
 
 	double[] dna;
 
-	public Vehicle(int x, int y, DrawingCanvas canvas) {
+	public Vehicle(int x, int y, double[] dna, DrawingCanvas canvas) {
 		this.canvas = canvas;
 		position = new JVector(x, y);
 		velocity = new JVector(0, -2);
@@ -32,16 +33,11 @@ public class Vehicle {
 		health = 1;
 		borders = 20; //Appy a steering behaviour when going outside the screen
 
-		dna = new double[4];
-
-		// Attraction to food
-		dna[0] = (Math.random()*4) - 2;
-		// Attraction to poison
-		dna[1] = (Math.random()*4) - 2;
-		// Food perception
-		dna[2] = (int)(Math.random()*91) + 10; //Between 10 and 100
-		// Poison perception
-		dna[3] = (int)(Math.random()*91) + 10;
+		this.dna = new double[4];
+		this.dna[0] = dna[0];
+		this.dna[1] = dna[1];
+		this.dna[2] = dna[2];
+		this.dna[3] = dna[3];
 	}
 
 	public void update() {
@@ -71,6 +67,27 @@ public class Vehicle {
 		this.applyForce(steerB);
 	}
 	
+	public Vehicle cloneMe() {
+		if (Math.random()*10000 < 20) {
+			//Mutation
+			if (Math.random()*100 <= mr) {
+				this.dna[0] += Math.random()*0.2 - 0.1;
+			}
+			if (Math.random()*100 <= mr) {
+				this.dna[1] += Math.random()*0.2 - 0.1;
+			}
+			if (Math.random()*100 <= mr) {
+				this.dna[2] += Math.random()*20 - 10;
+			}
+			if (Math.random()*100 <= mr) {
+				this.dna[3] += Math.random()*20 - 10;
+			}
+			return new Vehicle(this.position.intX(), this.position.intY(), this.dna, canvas);
+		}
+		else {
+			return null;
+		}
+	}
 
 	public void applyForce(JVector force) {
 		acceleration.add(force);
@@ -120,24 +137,26 @@ public class Vehicle {
 
 	public JVector eat(ArrayList<JVector> list, double nutrition, double perception) {
 		double record = Double.MAX_VALUE;
-		int closestIndex = -1;
-		for (int i = 0; i < list.size(); i++) {
+		JVector closest = null;
+		for (int i = list.size() - 1; i >= 0; i--) {
 			JVector dist = JVector.sub2Vecs(this.position, list.get(i));
 			double mag = dist.getMagnitude();
-			if (mag < record && mag < perception) {
-				record = mag;
-				closestIndex = i;
+
+			// This is the moment of eating!
+			if (mag < 7) {
+				list.remove(i);
+				this.health += nutrition;
+			}
+			else {
+				if (mag < record && mag < perception) {
+					record = mag;
+					closest = list.get(i);
+				}
 			}
 		}
 
-
-		// This is the moment of eating!
-		if (record < 7) {
-			list.remove(closestIndex);
-			this.health += nutrition;
-		}
-		else if (closestIndex >= 0 && closestIndex < list.size()) {
-			return this.seek(list.get(closestIndex));
+		if (closest != null) {
+			return this.seek(closest);
 		}
 
 		return new JVector(0, 0); //There's nothing
