@@ -27,7 +27,7 @@ public class Vehicle {
 		velocity = new JVector(0, -2);
 		acceleration = new JVector(0, 0);
 
-		maxVelocity = 3.5;
+		maxVelocity = 3;
 		maxForce = 0.5;
 
 		health = 1;
@@ -143,7 +143,7 @@ public class Vehicle {
 			double mag = dist.getMagnitude();
 
 			// This is the moment of eating!
-			if (mag < 7) {
+			if (mag < 4) {
 				list.remove(i);
 				this.health += nutrition;
 			}

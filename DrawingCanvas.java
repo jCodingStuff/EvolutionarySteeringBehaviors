@@ -84,13 +84,13 @@ public class DrawingCanvas extends Canvas {
 			//Draw Food
 			g.setColor(new Color(0, 255, 0));
 			for (int i = 0; i < food.size(); i++) {
-				g.fillOval(food.get(i).intX(), food.get(i).intY(), 8, 8);
+				g.fillOval(food.get(i).intX(), food.get(i).intY(), 6, 6);
 			}
 
 			//Draw poison
 			g.setColor(new Color(255, 0, 0));
 			for (int i = 0; i < poison.size(); i++) {
-				g.fillOval(poison.get(i).intX(), poison.get(i).intY(), 8, 8);
+				g.fillOval(poison.get(i).intX(), poison.get(i).intY(), 6, 6);
 			}
 
 			//Draw agents
