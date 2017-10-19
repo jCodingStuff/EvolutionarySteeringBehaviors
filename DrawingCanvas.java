@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
 public class DrawingCanvas extends Canvas {
 
@@ -15,6 +17,7 @@ public class DrawingCanvas extends Canvas {
 
 	public DrawingCanvas(int width, int height) {
 		setSize(width, height);
+		setFocusable(true);
 
 		//AGENTS
 		agents = new ArrayList<Vehicle>();
@@ -26,7 +29,7 @@ public class DrawingCanvas extends Canvas {
 
 		//FOOD
 		food = new ArrayList<JVector>();
-		for (int i = 0; i < 40; i++) {
+		for (int i = 0; i < 45; i++) {
 			int x = (int) (Math.random()*canvasSize().getX());
 			int y = (int) (Math.random()*canvasSize().getY());
 			food.add(new JVector(x, y));
@@ -56,7 +59,7 @@ public class DrawingCanvas extends Canvas {
 			g.fillRect(0, 0, canvasSize().intX(), canvasSize().intY());
 
 			//Add food once in a while
-			if (Math.random()*100 < 5) {
+			if (Math.random()*100 < 4) {
 				int x = (int) (Math.random()*canvasSize().getX());
 				int y = (int) (Math.random()*canvasSize().getY());
 				food.add(new JVector(x, y));

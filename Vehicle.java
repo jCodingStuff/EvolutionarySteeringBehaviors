@@ -46,7 +46,7 @@ public class Vehicle {
 
 	public void update() {
 
-		health -= 0.005;
+		health -= 0.006;
 
 		velocity.add(acceleration);
 		double speed = velocity.getMagnitude(); //Limit the speed
@@ -61,7 +61,7 @@ public class Vehicle {
 	}
 	
 	public void applyBehaviours(ArrayList<JVector> good, ArrayList<JVector> bad) {
-		JVector steerG = this.eat(good, 0.2, this.dna[2]); //Eat food, gain health
+		JVector steerG = this.eat(good, 0.3, this.dna[2]); //Eat food, gain health
 		JVector steerB = this.eat(bad, -0.5, this.dna[3]); //Eat poison, get sick :(
 
 		steerG.multiply(this.dna[0]);
