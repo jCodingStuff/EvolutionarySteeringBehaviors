@@ -53,6 +53,12 @@ public class JVector {
 		this.multiply(number);
 	}
 
+	public void limit(double value) {
+		if (this.getMagnitude() > value) {
+			this.setMagnitude(value);
+		}
+	}
+
 	public static JVector opposite(JVector vector) {
 		double invX = vector.y;
 		double invY = vector.x;
@@ -81,5 +87,31 @@ public class JVector {
 		double subX = vector1.getX() - vector2.getX();
 		double subY = vector1.getY() - vector2.getY();
 		return new JVector(subX, subY);
+	}
+
+	public static double dist2Vecs(JVector vector1, JVector vector2) {
+		double intervalX = vector2.getX() - vector1.getX();
+		double intervalY = vector2.getY() - vector1.getY();
+		double distance = Math.sqrt(Math.pow(intervalX, 2) + Math.pow(intervalY, 2));
+		return distance;
+	}
+
+	public static double dist(double x1, double y1, double x2, double y2) {
+		double intervalX = x2 - x1;
+		double intervalY = y2 - y1;
+		double distance = Math.sqrt(Math.pow(intervalX, 2) + Math.pow(intervalY, 2));
+		return distance;
+	}
+
+	public static double dotProduct(JVector vector1, JVector vector2) {
+		double result = vector1.getX() * vector2.getX() + vector1.getY() * vector2.getY();
+		return result;
+	}
+
+	public static double angleBetween(JVector vector1, JVector vector2) { //Gives the angle in radians
+		double topPart = dotProduct(vector1, vector2);
+		double botPart = vector1.getMagnitude() * vector2.getMagnitude();
+		double cosine = topPart / botPart;
+		return Math.acos(cosine);
 	}
 }
