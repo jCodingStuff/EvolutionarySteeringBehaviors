@@ -12,15 +12,6 @@ And yeah, they are cannibals, so when an agent dies, it leaves a piece of food i
 Finally, I will set general rules: agents are not able to go off the field, food and poison appear at random locations once in a while...
 The objective of this project is to simulate a society and see what is the OPTIMAL AGENT.
 
-Status of the project:
-16-10-2017: creating a custom vector class to work with the physics of the world (steering forces).
-18-10-2017: creating the window, the canvas, and the framerate.
-18-10-2017: creating the agents, the food, and the poison
-18-10-2017: creating the steering forces and evolving stuff
-18-10-2017: adding a perception radius to the agents
-19-10-2017: adding the evolution and mutation to the agents
-19-10-2017 (CURRENT STATUS): adding the family features, discovering that poison is bad...
-
 Craig Reynold's paper: https://www.red3d.com/cwr/steer/
 Dan Shiffman in YouTube: https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw
 Coding Challenge 69: https://www.youtube.com/watch?v=flxOkx0yLrY
