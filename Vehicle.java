@@ -55,7 +55,7 @@ public class Vehicle {
 	public boolean dead() {
 		return (this.health <= 0);
 	}
-	
+
 	public void applyBehaviours(ArrayList<JVector> good, ArrayList<JVector> bad) {
 		JVector steerG = this.eat(good, 0.3, this.dna[2]); //Eat food, gain health
 		JVector steerB = this.eat(bad, -0.5, this.dna[3]); //Eat poison, get sick :(
@@ -66,7 +66,7 @@ public class Vehicle {
 		this.applyForce(steerG);
 		this.applyForce(steerB);
 	}
-	
+
 	public Vehicle cloneMe() {
 		if (Math.random()*10000 < 20) {
 			//Mutation
@@ -100,7 +100,7 @@ public class Vehicle {
 		else {
 			g.setColor(new Color(0, 255, 0));
 		}
-		g.fillRect(position.intX(), position.intY(), AGENT_WIDTH, AGENT_WIDTH);
+		g.fillRect(position.intX() - AGENT_WIDTH/2, position.intY() - AGENT_WIDTH/2, AGENT_WIDTH, AGENT_WIDTH);
 		g.setColor(new Color(0, 255, 0)); //Food perception
 		g.drawOval(position.intX() - (int)this.dna[2], position.intY() - (int)this.dna[2], (int)(this.dna[2]*2), (int)(this.dna[2]*2)); //Put the centre of the circle in the centre
 		g.setColor(new Color(255, 0, 0)); //Poison perception

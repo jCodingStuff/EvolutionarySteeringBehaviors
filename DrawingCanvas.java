@@ -14,6 +14,7 @@ public class DrawingCanvas extends Canvas {
 	ArrayList<Vehicle> agents;
 	ArrayList<JVector> food;
 	ArrayList<JVector> poison;
+	final int CIRCLE = 6;
 
 	public DrawingCanvas(int width, int height) {
 		setSize(width, height);
@@ -84,13 +85,13 @@ public class DrawingCanvas extends Canvas {
 			//Draw Food
 			g.setColor(new Color(0, 255, 0));
 			for (int i = 0; i < food.size(); i++) {
-				g.fillOval(food.get(i).intX(), food.get(i).intY(), 6, 6);
+				g.fillOval(food.get(i).intX() - CIRCLE/2, food.get(i).intY() - CIRCLE/2, CIRCLE, CIRCLE);
 			}
 
 			//Draw poison
 			g.setColor(new Color(255, 0, 0));
 			for (int i = 0; i < poison.size(); i++) {
-				g.fillOval(poison.get(i).intX(), poison.get(i).intY(), 6, 6);
+				g.fillOval(poison.get(i).intX() - CIRCLE/2, poison.get(i).intY() - CIRCLE/2, CIRCLE, CIRCLE);
 			}
 
 			//Draw agents
