@@ -1,4 +1,4 @@
-# EvolutionarySteeringBehaviours
+# EvolutionarySteeringBehaviors
 
 The goal of this project is creating, in Java, a 2D world based on Craig Reynold's paper "Steering Behaviors for Autonomous Characters" and Daniel Shiffman's Coding Challenge 69 Evolutionary Steering Behaviors (LINKS IN THE END OF THE FILE!).
 
