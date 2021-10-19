@@ -23,8 +23,8 @@ public class Run {
 		FPS++;
 	}
 
-	public static void createWindow(int Width, int height, String title) {
-		canvas = new DrawingCanvas(Width, height);
+	public static void createWindow(int width, int height, String title) {
+		canvas = new DrawingCanvas(width, height);
 		frame = new Window(title, canvas);
 	}
 
