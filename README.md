@@ -1,6 +1,6 @@
 # EvolutionarySteeringBehaviors
 
-The goal of this project is creating, in Java, a 2D world based on Craig Reynold's paper "[Steering Behaviors for Autonomous Characters](https://www.red3d.com/cwr/steer/)" and [Daniel Shiffman](https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw)'s [Coding Challenge 69 Evolutionary Steering Behaviors](https://www.youtube.com/watch?v=flxOkx0yLrY).
+The goal of this project is to create, in Java, a 2D world based on Craig Reynold's paper "[Steering Behaviors for Autonomous Characters](https://www.red3d.com/cwr/steer/)" and [Daniel Shiffman](https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw)'s [Coding Challenge 69 Evolutionary Steering Behaviors](https://www.youtube.com/watch?v=flxOkx0yLrY).
 
 I will try to design a kind of map, in which there will be autonomous agents, food (green circles) and poison (red circles).  
 The thing is, the agents have a health number, which will be decreasing as time goes on, so they will have to seek for food (which gives certain points of health).  
