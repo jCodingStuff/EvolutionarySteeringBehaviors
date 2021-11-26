@@ -93,13 +93,10 @@ public class Vehicle {
 		acceleration.add(force);
 	}
 
-	public void draw(Graphics g) { //Should design a lerp algorithm for changing the color with the health
-		if (this.health < 0.5) {
-			g.setColor(new Color(255, 0, 0));
-		}
-		else {
-			g.setColor(new Color(0, 255, 0));
-		}
+	public void draw(Graphics g) {
+		float red = Utils.constrain(1f - ((float) this.health), 0f, 1f);
+		float green = Utils.constrain((float) this.health, 0f, 1f);
+		g.setColor(new Color(red, green, 0f));
 		g.fillRect(position.intX() - AGENT_WIDTH/2, position.intY() - AGENT_WIDTH/2, AGENT_WIDTH, AGENT_WIDTH);
 		g.setColor(new Color(0, 255, 0)); //Food perception
 		g.drawOval(position.intX() - (int)this.dna[2], position.intY() - (int)this.dna[2], (int)(this.dna[2]*2), (int)(this.dna[2]*2)); //Put the centre of the circle in the centre
@@ -173,16 +170,6 @@ public class Vehicle {
 		steering.setMagnitude(maxF);
 		return steering;
 		//applyForce(steering);
-	}
-
-	private double mapData(double value, double min1, double max1, double min2, double max2) {
-		double tempValue = value - min1;
-		double interval1 = max1 - min1;
-		double interval2 = max2 - min2;
-		double perc = tempValue / interval1;
-		double tempMap = perc * interval2;
-		double mapped = tempMap + min2;
-		return mapped;
 	}
 
 	private double maxData(double value, double max) {
